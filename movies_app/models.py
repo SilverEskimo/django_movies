@@ -18,7 +18,7 @@ class Movie(models.Model):
 
 
 class Director(models.Model):
-
+    # This is the Directors table
     class Meta:
         db_table = 'directors'
 
@@ -34,7 +34,7 @@ class Director(models.Model):
 
 
 class Review(models.Model):
-
+    # This is the reviews table
     class Meta:
         db_table = 'reviews'
 
