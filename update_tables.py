@@ -2,6 +2,7 @@ import csv
 import datetime
 import os
 import django
+from django.db.models import Q, Count, Min, Max, Avg
 
 os.environ["DJANGO_SETTINGS_MODULE"] = "movies.settings"
 django.setup()

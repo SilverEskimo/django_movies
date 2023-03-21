@@ -13,6 +13,9 @@ class Movie(models.Model):
     description = models.TextField(null=True, blank=True)
     duration_in_min = models.IntegerField(null=True)
 
+    # for many to many relations
+    actors = models.ManyToManyField('Actor', through="MovieActor")
+
     def __str__(self):
         return f"{self.name}, Year: {self.year}"
 
@@ -60,14 +63,19 @@ class Actor(models.Model):
     name = models.CharField(max_length=256, db_column='name', null=False, blank=False)
     birth_year = models.IntegerField(db_column='birth_year', null=False, blank=False)
 
+    # for many to many relations
+    movies = models.ManyToManyField(Movie, through="MovieActor")
+
     def __str__(self):
         return self.name
 
 
 class MovieActor(models.Model):
+
     # Many to many relation
     class Meta:
         db_table = "movie_actors"
+
     actor = models.ForeignKey(Actor, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     salary = models.FloatField()
@@ -75,3 +83,4 @@ class MovieActor(models.Model):
 
     def __str__(self):
         return f"{self.actor.name} in movie {self.movie.name}"
+    
