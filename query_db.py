@@ -3,6 +3,7 @@ from movies_app.models import *
 
 
 if __name__ == '__main__':
+    pass
     # q1 = Movie.objects.filter(year__gt=1990)
     # print(q1)
     #

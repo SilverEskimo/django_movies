@@ -78,12 +78,15 @@ if __name__ == '__main__':
 
     # Get actors who played main roles at least once
     q12 = Actor.objects.annotate(
-        main_role=Count('movieactor__main_role')
-    ).filter(main_role__gte=1)
-
+        main_role=Count(
+            'movieactor__id',
+            filter=Q(movieactor__main_role=True)
+        )
+    ).filter(
+        main_role__gte=1
+    )
     for actor in q12:
-        if actor.main_role:
-            print(actor.name, actor.main_role)
+        print(actor.name, actor.main_role)
 
     # Get movies and amount of actors who played main roles
     q13 = Movie.objects.filter(
